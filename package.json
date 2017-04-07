@@ -1,0 +1,27 @@
+{
+  "name": "monogra-editor",
+  "version": "1.0.0",
+  "description": "Front-end Single-page-application editor used in Monogra",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-elm": "^0.6.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-elm": "^0.6.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mateusfccp/Monogra-Editor.git"
+  },
+  "author": "Mateus Felipe C. C. Pinto <mateusfccp@gmail.com>",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/mateusfccp/Monogra-Editor/issues"
+  },
+  "homepage": "https://github.com/mateusfccp/Monogra-Editor#readme"
+}
