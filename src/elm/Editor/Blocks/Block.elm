@@ -1,10 +1,10 @@
 module Editor.Blocks.Block exposing (..)
 
 import Html exposing (Html)
-import Editor.Blocks.IndirectQuote as IndirectQuote exposing (html)
-import Editor.Blocks.Paragraph as Paragraph exposing (html)
-import Editor.Blocks.Section as Section exposing (html)
-import Editor.Blocks.Subsection as Subsection exposing (html)
+import Editor.Blocks.IndirectQuote as IndirectQuote
+import Editor.Blocks.Paragraph as Paragraph
+import Editor.Blocks.Section as Section exposing (SectionType)
+import Editor.Blocks.Subsection as Subsection
 
 
 -- Block
@@ -12,9 +12,13 @@ import Editor.Blocks.Subsection as Subsection exposing (html)
 
 type Block
     = IndirectQuote ParagraphContent
-    | Paragraph ParagraphID ParagraphContent
-    | Section SectionType SectionChildren
-    | Subsection SubsectionHeading SubsectionChildren
+    | Paragraph ParagraphContent
+    | Section SectionType BlockChildren
+    | Subsection SubsectionHeading BlockChildren
+
+
+type alias BlockChildren =
+    List Block
 
 
 
@@ -30,30 +34,11 @@ type alias ParagraphContent =
 
 
 
--- Section
-
-
-type SectionType
-    = Cover
-    | Index
-    | Body
-    | References
-
-
-type SectionChildren
-    = Maybe (List Block)
-
-
-
 -- Subsection
 
 
 type alias SubsectionHeading =
     String
-
-
-type alias SubsectionChildren =
-    List Block
 
 
 view : Block -> Html msg
@@ -62,11 +47,11 @@ view block =
         IndirectQuote content ->
             IndirectQuote.html
 
-        Paragraph id content ->
-            Paragraph.html
+        Paragraph content ->
+            Paragraph.html content
 
-        Section stype children ->
-            Section.html
+        Section sectiontype children ->
+            Section.html sectiontype (List.map view children)
 
         Subsection heading children ->
-            Subsection.html
+            Subsection.html heading (List.map view children)

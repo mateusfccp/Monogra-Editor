@@ -1,0 +1,14 @@
+.bg-blue {
+	background-color: #07c;
+}
+
+.white {
+	color: white;
+}
+
+.fill {
+	width: 100%;
+}
+ body {
+	font-family: sans-serif;
+ }

@@ -4,12 +4,17 @@
   "description": "Front-end Single-page-application editor used in Monogra",
   "main": "index.js",
   "dependencies": {
-    "gulp": "^3.9.1",
-    "gulp-elm": "^0.6.1"
+    "basscss": "^8.0.2",
+    "font-awesome": "^4.7.0"
   },
   "devDependencies": {
+    "basscss": "^8.0.2",
+    "font-awesome": "^4.7.0",
     "gulp": "^3.9.1",
-    "gulp-elm": "^0.6.1"
+    "gulp-concat": "^2.6.1",
+    "gulp-elm": "^0.6.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-rename": "^1.2.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

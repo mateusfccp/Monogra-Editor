@@ -1,10 +1,12 @@
 module Editor.Blocks.Paragraph exposing (..)
 
-import Html exposing (Html, div, textarea)
+import Html exposing (Html, div, text, textarea)
+import Html.Attributes exposing (property)
+import Json.Encode as Encode
 
 
-html : Html msg
-html =
+html : String -> Html msg
+html content =
     div []
-        [ textarea [] []
+        [ textarea [ property "className" (Encode.string "fill p2 border rounded") ] [ text content ]
         ]
