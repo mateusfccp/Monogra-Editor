@@ -3,6 +3,7 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var elm	= require('gulp-elm');
 var minifyCSS = require('gulp-minify-css');
+var nodemon = require('gulp-nodemon');
 var rename = require ('gulp-rename');
 
 // Elm related
@@ -32,3 +33,18 @@ gulp.task('css-bundle', function () {
 });
 
 gulp.task('build', ['elm-bundle', 'css-bundle']);
+
+gulp.task ('serve-json', function () {
+	nodemon({ script: 'api.js' });
+})
+
+gulp.task('debug-server', ['build', 'serve-json'], function () {
+	var elm_watcher = gulp.watch('src/elm/**/*.elm', ['elm-bundle'])
+	var css_watcher = gulp.watch('src/css/**/*.css', ['css-bundle']);
+	elm_watcher.on('change', function(event) {
+		console.log('Elm Watcher: File ' + event.path + ' was ' + event.type + ', running tasks...');
+	});
+	css_watcher.on('change', function(event) {
+		console.log('CSS Watcher: File ' + event.path + ' was ' + event.type + ', running tasks...');
+	});
+})
