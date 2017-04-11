@@ -46,8 +46,8 @@ structureDecoder =
     list Block.decoder
 
 
-documentDecoder : Decoder Document
-documentDecoder =
+decoder : Decoder Document
+decoder =
     decode Document
         |> required "meta" metaDecoder
         |> required "structure" structureDecoder

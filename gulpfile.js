@@ -11,40 +11,44 @@ var rename = require ('gulp-rename');
 gulp.task('elm-init', elm.init);
 
 gulp.task('elm', ['elm-init'], function(){
-	return gulp.src('src/elm/**/*.elm')
-	           .pipe(elm())
-	           .pipe(gulp.dest('dist/'));
+    return gulp.src('src/elm/**/*.elm')
+               .pipe(elm())
+               .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('elm-bundle', ['elm-init'], function(){
-	return gulp.src('src/elm/**/*.elm')
-	           .pipe(elm.bundle('bundle.js'))
-	           .pipe(rename('app.js'))
-	           .pipe(gulp.dest('dist/'));
+    return gulp.src('src/elm/**/*.elm')
+               .pipe(elm.bundle('bundle.js'))
+               .on('error', function (error) {
+                   console.log(error.toString());
+                   this.emit('end');
+               })
+               .pipe(rename('app.js'))
+               .pipe(gulp.dest('dist/'));
 });
 
 // CSS related
 
 gulp.task('css-bundle', function () {
-	return gulp.src('src/css/**/*.css')
-	           .pipe(concat('style.css'))
-			   .pipe(minifyCSS())
-			   .pipe(gulp.dest('dist/'));
+    return gulp.src('src/css/**/*.css')
+               .pipe(concat('style.css'))
+               .pipe(minifyCSS())
+               .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('build', ['elm-bundle', 'css-bundle']);
 
 gulp.task ('serve-json', function () {
-	nodemon({ script: 'api.js' });
+    nodemon({ script: 'api.js' });
 })
 
 gulp.task('debug-server', ['build', 'serve-json'], function () {
-	var elm_watcher = gulp.watch('src/elm/**/*.elm', ['elm-bundle'])
-	var css_watcher = gulp.watch('src/css/**/*.css', ['css-bundle']);
-	elm_watcher.on('change', function(event) {
-		console.log('Elm Watcher: File ' + event.path + ' was ' + event.type + ', running tasks...');
-	});
-	css_watcher.on('change', function(event) {
-		console.log('CSS Watcher: File ' + event.path + ' was ' + event.type + ', running tasks...');
-	});
+    var elm_watcher = gulp.watch('src/elm/**/*.elm', ['elm-bundle'])
+    var css_watcher = gulp.watch('src/css/**/*.css', ['css-bundle']);
+    elm_watcher.on('change', function(event) {
+        console.log('Elm Watcher: File ' + event.path + ' was ' + event.type + ', running tasks...');
+    });
+    css_watcher.on('change', function(event) {
+        console.log('CSS Watcher: File ' + event.path + ' was ' + event.type + ', running tasks...');
+    });
 })

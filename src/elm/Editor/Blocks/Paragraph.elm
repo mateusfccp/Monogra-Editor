@@ -5,6 +5,11 @@ import Html.Attributes exposing (property)
 import Json.Encode as Encode
 
 
+type ParagraphType
+    = Paragraph
+    | Quote
+
+
 html : String -> Html msg
 html content =
     div []
