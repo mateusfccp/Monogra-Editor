@@ -15,11 +15,20 @@ Then, install Elm dependencies:
 $ elm package install
 ```
 
-Then, run the gulp build task:
+## Compiling
+
+If you want simply to build your Elm and css files, run the following command:
 
 ```
 $ gulp build
 ```
 
-After this, I hope the CSS and JS has been successfully compiled.
-Now, you can access the `index.html` file of the root folder and it should be working.
+## Running debug server
+
+I made a debug server which serves a dummy document (`public/dummy.json`) and a `index.html` to test the editor. You can run the server with the following command:
+
+```
+$ gulp debug-server
+```
+
+Then, the editor will be available at `localhost:4000`, and the json server at `localhost:4000/api/db`.
