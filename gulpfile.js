@@ -13,7 +13,7 @@ gulp.task('elm-init', elm.init);
 gulp.task('elm', ['elm-init'], function(){
     return gulp.src('src/elm/**/*.elm')
                .pipe(elm())
-               .pipe(gulp.dest('dist/'));
+               .pipe(gulp.dest('public/dist/'));
 });
 
 gulp.task('elm-bundle', ['elm-init'], function(){
@@ -24,7 +24,7 @@ gulp.task('elm-bundle', ['elm-init'], function(){
                    this.emit('end');
                })
                .pipe(rename('app.js'))
-               .pipe(gulp.dest('dist/'));
+               .pipe(gulp.dest('public/dist/'));
 });
 
 // CSS related
@@ -33,7 +33,7 @@ gulp.task('css-bundle', function () {
     return gulp.src('src/css/**/*.css')
                .pipe(concat('style.css'))
                .pipe(minifyCSS())
-               .pipe(gulp.dest('dist/'));
+               .pipe(gulp.dest('public/dist/'));
 });
 
 gulp.task('build', ['elm-bundle', 'css-bundle']);

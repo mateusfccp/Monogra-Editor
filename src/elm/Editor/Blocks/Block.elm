@@ -4,7 +4,7 @@ import Html exposing (Html)
 import Editor.Blocks.Paragraph as Paragraph exposing (ParagraphType)
 import Editor.Blocks.Section as Section exposing (SectionType)
 import Editor.Blocks.Subsection as Subsection
-import Json.Decode as Decode exposing (andThen, Decoder, fail, field, list, string)
+import Json.Decode as Decode exposing (andThen, Decoder, fail, field, lazy, list, string)
 import Json.Decode.Pipeline exposing (decode, required, custom)
 
 
@@ -67,7 +67,7 @@ sectionDecoder : Decoder BlockType
 sectionDecoder =
     decode Section
         |> custom (field "SectionType" string |> andThen sectionTypeDecoder)
-        |> required "BlockChildren" (list decoder)
+        |> required "BlockChildren" (list (lazy (\_ -> decoder)))
 
 
 sectionTypeDecoder : String -> Decoder SectionType
@@ -101,7 +101,7 @@ subsectionDecoder : Decoder BlockType
 subsectionDecoder =
     decode Subsection
         |> required "SubsectionHeading" string
-        |> required "BlockChildren" (list decoder)
+        |> required "BlockChildren" (list (lazy (\_ -> decoder)))
 
 
 view : Block -> Html msg
@@ -121,7 +121,7 @@ decoder : Decoder Block
 decoder =
     decode Block
         |> required "id" string
-        |> custom (field "blocktype" string |> andThen blockDecoder)
+        |> custom (field "blockType" string |> andThen blockDecoder)
 
 
 blockDecoder : String -> Decoder BlockType
