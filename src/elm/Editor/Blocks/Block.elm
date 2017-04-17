@@ -1,42 +1,15 @@
 module Editor.Blocks.Block exposing (..)
 
 import Html exposing (Html)
-import Editor.Blocks.Paragraph as Paragraph exposing (ParagraphType)
-import Editor.Blocks.Section as Section exposing (SectionType)
+import Editor.Blocks.Paragraph as Paragraph
+import Editor.Blocks.Section as Section
 import Editor.Blocks.Subsection as Subsection
+import Editor.Models exposing (..)
 import Json.Decode as Decode exposing (andThen, Decoder, fail, field, lazy, list, string)
 import Json.Decode.Pipeline exposing (decode, required, custom)
 
 
--- Block
-
-
-type alias Block =
-    { id : BlockID
-    , blockType : BlockType
-    }
-
-
-type BlockType
-    = Paragraph ParagraphType ParagraphContent
-    | Section SectionType BlockChildren
-    | Subsection SubsectionHeading BlockChildren
-
-
-type alias BlockID =
-    String
-
-
-type alias BlockChildren =
-    List Block
-
-
-
 -- Paragraph
-
-
-type alias ParagraphContent =
-    String
 
 
 paragraphDecoder : Decoder BlockType
@@ -49,11 +22,11 @@ paragraphDecoder =
 paragraphTypeDecoder : String -> Decoder ParagraphType
 paragraphTypeDecoder paragraphType =
     case paragraphType of
-        "Paragraph" ->
-            decode Paragraph.Paragraph
+        "Default" ->
+            decode DefaultParagraph
 
         "Quote" ->
-            decode Paragraph.Quote
+            decode Quote
 
         _ ->
             fail (paragraphType ++ " is not a recognized ParagraphType")
@@ -74,16 +47,16 @@ sectionTypeDecoder : String -> Decoder SectionType
 sectionTypeDecoder sectionType =
     case sectionType of
         "Cover" ->
-            decode Section.Cover
+            decode Cover
 
         "Index" ->
-            decode Section.Index
+            decode Index
 
         "Body" ->
-            decode Section.Body
+            decode Body
 
         "Bibliography" ->
-            decode Section.Bibliography
+            decode Bibliography
 
         _ ->
             fail (sectionType ++ " is not a recognized SectionType")
@@ -93,10 +66,6 @@ sectionTypeDecoder sectionType =
 -- Subsection
 
 
-type alias SubsectionHeading =
-    String
-
-
 subsectionDecoder : Decoder BlockType
 subsectionDecoder =
     decode Subsection
@@ -104,17 +73,8 @@ subsectionDecoder =
         |> required "BlockChildren" (list (lazy (\_ -> decoder)))
 
 
-view : Block -> Html msg
-view block =
-    case block.blockType of
-        Paragraph paragraphType content ->
-            Paragraph.html content
 
-        Section sectionType children ->
-            Section.html sectionType (List.map view children)
-
-        Subsection heading children ->
-            Subsection.html heading (List.map view children)
+-- Block
 
 
 decoder : Decoder Block
@@ -138,3 +98,16 @@ blockDecoder blockType =
 
         _ ->
             fail (blockType ++ " is not a recognized BlockType")
+
+
+view : Block -> Html msg
+view block =
+    case block.blockType of
+        Paragraph paragraphType content ->
+            Paragraph.html content
+
+        Section sectionType children ->
+            Section.html sectionType (List.map view children)
+
+        Subsection heading children ->
+            Subsection.html heading (List.map view children)

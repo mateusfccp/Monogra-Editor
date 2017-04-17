@@ -1,29 +1,12 @@
 module Editor.Document exposing (..)
 
-import Editor.Blocks.Block as Block exposing (Block)
+import Editor.Blocks.Block as Block
+import Editor.Models exposing (Block, Document, DocumentMeta, DocumentStructure)
 import Html exposing (Html, div)
 import Html.Attributes exposing (property)
 import Json.Decode as Decode exposing (Decoder, list, string)
 import Json.Decode.Pipeline exposing (decode, required, optional, hardcoded)
 import Json.Encode as Encode
-
-
-type alias Document =
-    { meta : DocumentMeta
-    , structure : List Block
-    }
-
-
-type alias DocumentMeta =
-    { abstract : String
-    , authors : List String
-    , keywords : List String
-    , title : String
-    }
-
-
-type alias DocumentStructure =
-    List Block
 
 
 html : List Block -> Html msg

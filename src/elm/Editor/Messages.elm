@@ -1,6 +1,6 @@
 module Editor.Messages exposing (..)
 
-import Editor.Document as Document exposing (Document)
+import Editor.Models exposing (Document)
 import RemoteData exposing (WebData)
 
 

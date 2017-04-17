@@ -1,15 +1,9 @@
 module Editor.Blocks.Section exposing (..)
 
+import Editor.Models exposing (SectionType(..))
 import Html exposing (Html, div, p, text)
 import Html.Attributes exposing (property)
 import Json.Encode as Encode
-
-
-type SectionType
-    = Cover
-    | Index
-    | Body
-    | Bibliography
 
 
 html : SectionType -> List (Html msg) -> Html msg
