@@ -10,8 +10,8 @@
     "devDependencies": {
         "basscss": "^8.0.2",
         "clean-css": "^4.1.2",
-        "cors": "^2.8.3", // Bug
-        "express": "^4.15.2", // Bug
+        "cors": "^2.8.3",
+        "express": "^4.15.2",
         "font-awesome": "^4.7.0",
         "gulp": "^3.9.1",
         "gulp-clean-css": "^3.2.0",
