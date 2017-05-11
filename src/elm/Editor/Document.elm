@@ -3,15 +3,14 @@ module Editor.Document exposing (..)
 import Editor.Blocks.Block as Block
 import Editor.Models exposing (Block, Document, DocumentMeta, DocumentStructure)
 import Html exposing (Html, div)
-import Html.Attributes exposing (property)
+import Html.Attributes exposing (class)
 import Json.Decode as Decode exposing (Decoder, list, string)
 import Json.Decode.Pipeline exposing (decode, required, optional, hardcoded)
-import Json.Encode as Encode
 
 
 html : List Block -> Html msg
 html structure =
-    div [ property "className" (Encode.string "p2 bg-white border rounded") ]
+    div [ class "document" ]
         (List.map Block.view structure)
 
 

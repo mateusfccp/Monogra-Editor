@@ -1,6 +1,7 @@
 module Editor.Blocks.Block exposing (..)
 
-import Html exposing (Html)
+import Html exposing (Html, div)
+import Html.Attributes exposing (class)
 import Editor.Blocks.Paragraph as Paragraph
 import Editor.Blocks.Section as Section
 import Editor.Blocks.Subsection as Subsection
@@ -102,12 +103,16 @@ blockDecoder blockType =
 
 view : Block -> Html msg
 view block =
-    case block.blockType of
-        Paragraph paragraphType content ->
-            Paragraph.html content
+    let
+        inner =
+            case block.blockType of
+                Paragraph paragraphType content ->
+                    Paragraph.html content
 
-        Section sectionType children ->
-            Section.html sectionType (List.map view children)
+                Section sectionType children ->
+                    Section.html sectionType (List.map view children)
 
-        Subsection heading children ->
-            Subsection.html heading (List.map view children)
+                Subsection heading children ->
+                    Subsection.html heading (List.map view children)
+    in
+        div [ class "block" ] [ inner ]

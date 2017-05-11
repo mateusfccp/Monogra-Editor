@@ -2,28 +2,30 @@ module Editor.Blocks.Section exposing (..)
 
 import Editor.Models exposing (SectionType(..))
 import Html exposing (Html, div, p, text)
-import Html.Attributes exposing (property)
-import Json.Encode as Encode
+import Html.Attributes exposing (class)
 
 
 html : SectionType -> List (Html msg) -> Html msg
 html sectiontype children =
     case sectiontype of
         Cover ->
-            div []
-                [ p [ property "className" (Encode.string "p2 border rounded") ] [ text "Capa" ]
+            div [ class "section cover" ]
+                [ div [ class "header" ] [ text "Capa" ]
+                , p [] [ text "Este bloco representa a capa." ]
                 ]
 
         Index ->
-            div []
-                [ p [ property "className" (Encode.string "p2 border rounded") ] [ text "Índice" ]
+            div [ class "section index" ]
+                [ div [ class "header" ] [ text "Índice" ]
+                , p [] [ text "Aqui será renderizada uma representação do índice." ]
                 ]
 
         Body ->
-            div [ property "className" (Encode.string "p2 border rounded") ]
-                children
+            div [ class "section body" ]
+                ([ div [ class "header" ] [ text "Corpo" ] ] ++ children)
 
         Bibliography ->
-            div []
-                [ p [ property "className" (Encode.string "p2 border rounded") ] [ text "Bibliografia" ]
+            div [ class "section bibliography" ]
+                [ div [ class "header" ] [ text "Bibliografia" ]
+                , p [] [ text "Aqui será renderizada uma representação da bibliografia." ]
                 ]
