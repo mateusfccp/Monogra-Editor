@@ -1,0 +1,15 @@
+.paragraph {
+    height: 100%;
+    textarea {
+        border: none;
+        height: 100%;
+        resize: none;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        padding: .5rem;
+        width: 100%;
+        &:focus {
+            background-color: #eee;
+        }
+    }
+}

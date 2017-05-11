@@ -6,7 +6,7 @@ import Html.Attributes exposing (class)
 
 html : String -> List (Html msg) -> Html msg
 html heading children =
-    div [ class "overflow-hidden" ]
-        [ div [] [ text ("Subseção: " ++ heading) ]
+    div [ class "subsection" ]
+        [ div [ class "header" ] [ text ("Seção: " ++ heading) ]
         , div [] children
         ]

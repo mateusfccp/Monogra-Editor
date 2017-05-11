@@ -6,6 +6,6 @@ import Html.Attributes exposing (class)
 
 html : String -> Html msg
 html content =
-    div []
-        [ textarea [ class "fill p2 border rounded" ] [ text content ]
+    div [ class "paragraph" ]
+        [ textarea [] [ text content ]
         ]

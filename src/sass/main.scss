@@ -1,47 +1,4 @@
-@import 'ColorScheme';
-.bg-blue {
-    background-color: $color-primary-darker;
-}
-
-.white {
-    color: white;
-}
-
-.fill {
-    width: 100%;
-}
-
-.block {
-    border: 0;
-    border-radius: 0;
-    padding: 0;
-    width: 100%;
-    .header {
-        width: 100%;
-        font-size: 1rem;
-        font-family: sans-serif;
-        font-weight: 600;
-        text-transform: upper;
-        padding-left: 1rem;
-        background-color: #efefef;
-    }
-}
-
-.document {
-    width: 210mm;
-    padding: 0;
-    margin: 4rem auto;
-    padding: 4rem;
-    background-color: white;
-    border: 1px solid #eee;
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
-}
-
-.section {
-    border: 1px solid #efefef;
-    margin-bottom: 1rem;
-}
-
+@import 'Document';
 body {
     background-color: white;
     font-family: sans-serif;
