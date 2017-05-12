@@ -23,7 +23,7 @@ initialModel =
 
 type alias Document =
     { meta : DocumentMeta
-    , structure : List Block
+    , structure : BlockTree
     }
 
 
@@ -35,32 +35,39 @@ type alias DocumentMeta =
     }
 
 
-type alias DocumentStructure =
-    List Block
+
+-- BlockTree
+
+
+type alias BlockTree =
+    BlockNode
+
+
+type alias BlockNode =
+    { id : BlockID
+    , value : Block
+    , children : BlockChildren
+    }
 
 
 
 -- Block
 
 
-type alias Block =
-    { id : BlockID
-    , blockType : BlockType
-    }
-
-
-type BlockType
+type Block
     = Paragraph ParagraphType ParagraphContent
-    | Section SectionType BlockChildren
-    | Subsection SubsectionHeading BlockChildren
+    | Root
+    | Section SectionType
+    | Subsection SubsectionHeading
 
 
 type alias BlockID =
     String
 
 
-type alias BlockChildren =
-    List Block
+type BlockChildren
+    = Some (List BlockNode)
+    | None
 
 
 

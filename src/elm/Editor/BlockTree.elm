@@ -1,37 +1,17 @@
 module BlockTree exposing (..)
 
-import Editor.Models exposing (Block)
+import Editor.Models exposing (Block, BlockTree, BlockID, BlockChildren(..))
 import List exposing (filterMap, head)
 
 
-type alias BlockID =
-    String
-
-
-type BlockChildren
-    = Some (List BlockNode)
-    | None
-
-
-type alias BlockTree =
-    BlockNode
-
-
-type alias BlockNode =
-    { name : BlockID
-    , value : Block
-    , children : BlockChildren
-    }
-
-
 get : BlockTree -> BlockID -> Maybe Block
-get tree name_ =
-    if tree.name == name_ then
+get tree id =
+    if tree.id == id then
         Just tree.value
     else
         case tree.children of
             Some children ->
-                head (filterMap (\element -> get element name_) children)
+                head (filterMap (\element -> get element id) children)
 
             None ->
                 Nothing

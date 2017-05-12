@@ -7,13 +7,13 @@ import Editor.Blocks.Section as Section
 import Editor.Blocks.Subsection as Subsection
 import Editor.Models exposing (..)
 import Json.Decode as Decode exposing (andThen, Decoder, fail, field, lazy, list, string)
-import Json.Decode.Pipeline exposing (decode, required, custom)
+import Json.Decode.Pipeline exposing (decode, optional, required, custom)
 
 
 -- Paragraph
 
 
-paragraphDecoder : Decoder BlockType
+paragraphDecoder : Decoder Block
 paragraphDecoder =
     decode Paragraph
         |> custom (field "ParagraphType" string |> andThen paragraphTypeDecoder)
@@ -37,11 +37,10 @@ paragraphTypeDecoder paragraphType =
 -- Section
 
 
-sectionDecoder : Decoder BlockType
+sectionDecoder : Decoder Block
 sectionDecoder =
     decode Section
         |> custom (field "SectionType" string |> andThen sectionTypeDecoder)
-        |> required "BlockChildren" (list (lazy (\_ -> decoder)))
 
 
 sectionTypeDecoder : String -> Decoder SectionType
@@ -67,26 +66,26 @@ sectionTypeDecoder sectionType =
 -- Subsection
 
 
-subsectionDecoder : Decoder BlockType
+subsectionDecoder : Decoder Block
 subsectionDecoder =
     decode Subsection
         |> required "SubsectionHeading" string
-        |> required "BlockChildren" (list (lazy (\_ -> decoder)))
 
 
 
 -- Block
 
 
-decoder : Decoder Block
+decoder : Decoder BlockNode
 decoder =
-    decode Block
+    decode BlockNode
         |> required "id" string
-        |> custom (field "blockType" string |> andThen blockDecoder)
+        |> custom (field "Type" string |> andThen valueDecoder)
+        |> optional "Children" (list (lazy (\_ -> decoder)))
 
 
-blockDecoder : String -> Decoder BlockType
-blockDecoder blockType =
+valueDecoder : String -> Decoder Block
+valueDecoder blockType =
     case blockType of
         "Paragraph" ->
             paragraphDecoder
@@ -101,18 +100,28 @@ blockDecoder blockType =
             fail (blockType ++ " is not a recognized BlockType")
 
 
-view : Block -> Html msg
+view : BlockNode -> Html msg
 view block =
     let
         inner =
-            case block.blockType of
+            case block.value of
                 Paragraph paragraphType content ->
                     Paragraph.html content
 
-                Section sectionType children ->
-                    Section.html sectionType (List.map view children)
+                Section sectionType ->
+                    Section.html sectionType (parseChildren block.children)
 
-                Subsection heading children ->
-                    Subsection.html heading (List.map view children)
+                Subsection heading ->
+                    Subsection.html heading (parseChildren block.children)
     in
         div [ class "block" ] [ inner ]
+
+
+parseChildren : BlockChildren -> List (Html msg)
+parseChildren children =
+    case children of
+        Some children ->
+            List.map view children
+
+        None ->
+            []
