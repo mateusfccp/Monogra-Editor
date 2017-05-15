@@ -6,7 +6,7 @@ import Editor.Blocks.Paragraph as Paragraph
 import Editor.Blocks.Section as Section
 import Editor.Blocks.Subsection as Subsection
 import Editor.Models exposing (..)
-import Json.Decode as Decode exposing (andThen, Decoder, fail, field, lazy, list, string)
+import Json.Decode as Decode exposing (andThen, Decoder, fail, field, lazy, list, maybe, string)
 import Json.Decode.Pipeline exposing (decode, optional, required, custom)
 
 
@@ -76,12 +76,31 @@ subsectionDecoder =
 -- Block
 
 
+childrenDecoder : Maybe (List BlockNode) -> Decoder BlockChildren
+childrenDecoder children =
+    case children of
+        Nothing ->
+            decode None
+
+        Just value ->
+            case value of
+                [] ->
+                    decode None
+
+                _ ->
+                    decode (Some value)
+
+
 decoder : Decoder BlockNode
 decoder =
     decode BlockNode
         |> required "id" string
         |> custom (field "Type" string |> andThen valueDecoder)
-        |> optional "Children" (list (lazy (\_ -> decoder)))
+        |> custom (maybe (field "Children" (list (lazy (\_ -> decoder)))) |> andThen childrenDecoder)
+
+
+
+-- |> optional "Children" (list (lazy (\_ -> decoder)))
 
 
 valueDecoder : String -> Decoder Block
@@ -89,6 +108,9 @@ valueDecoder blockType =
     case blockType of
         "Paragraph" ->
             paragraphDecoder
+
+        "Root" ->
+            decode Root
 
         "Section" ->
             sectionDecoder
@@ -107,6 +129,9 @@ view block =
             case block.value of
                 Paragraph paragraphType content ->
                     Paragraph.html content
+
+                Root ->
+                    div [] (parseChildren block.children)
 
                 Section sectionType ->
                     Section.html sectionType (parseChildren block.children)

@@ -3,6 +3,7 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var cleanCSS = require('gulp-clean-css');
 var elm = require('gulp-elm');
+var minify = require('gulp-minify');
 var nodemon = require('gulp-nodemon');
 var rename = require('gulp-rename');
 var runSequence = require('run-sequence');
@@ -26,6 +27,18 @@ gulp.task('elm-bundle', ['elm-init'], function() {
             this.emit('end');
         })
         .pipe(rename('app.js'))
+        .pipe(gulp.dest('src/js/'));
+});
+
+// JS related
+
+gulp.task('js', function() {
+    gulp.src(['src/js/app.js', 'src/js/main.js', 'src/js/**/*.js'])
+        .pipe(concat('script.js'))
+        .pipe(minify({
+            noSource: true
+        }))
+        .pipe(rename('script.js'))
         .pipe(gulp.dest('public/dist/'));
 });
 
@@ -38,7 +51,7 @@ gulp.task('sass', function() {
 });
 
 gulp.task('css', ['sass'], function() {
-    return gulp.src(['src/css/**/reboot.css', 'src/css/**/basscss.css', 'src/css/**/*.css'])
+    return gulp.src(['src/css/**/reboot.css', 'src/css/**/basscss.css', 'src/css/**/font-awesome.css', 'src/css/**/*.css'])
         .pipe(concat('style.css'))
         .pipe(cleanCSS({
             level: {
@@ -67,7 +80,11 @@ gulp.task('build-css', function(callback) {
     runSequence('sass', 'css');
 });
 
-gulp.task('build', ['elm-bundle', 'build-css']);
+gulp.task('build-js', function(callback) {
+    runSequence('elm-bundle', 'js');
+})
+
+gulp.task('build', ['build-js', 'build-css']);
 
 gulp.task('serve-json', function() {
     nodemon({ script: 'api.js' });

@@ -34,10 +34,34 @@
   margin-bottom: 1rem; }
 
 .document {
-  width: 60vw;
+  margin: 4rem auto;
   padding: 0;
-  margin: 4rem auto; }
+  width: 60vw; }
+
+.editor {
+  background-color: #eee; }
+  .editor.loading, .editor.failure {
+    display: flex;
+    height: 100%;
+    position: fixed;
+    width: 100%; }
+    .editor.loading > div:only-child, .editor.failure > div:only-child {
+      align-items: center;
+      color: #666;
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+      text-shadow: 1px 1px 1px #fff; }
+      .editor.loading > div:only-child p, .editor.failure > div:only-child p {
+        font-weight: bold;
+        text-align: center; }
 
 body {
   background-color: white;
   font-family: sans-serif; }
+
+main {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%; }
