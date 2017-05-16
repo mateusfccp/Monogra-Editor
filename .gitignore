@@ -1,4 +1,6 @@
 /elm-stuff
 /node_modules
 /public/dist
+/src/css/main.css
+/src/js/app.js
 npm-debug.*
