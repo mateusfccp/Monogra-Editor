@@ -1,26 +1,40 @@
 module Editor.Components.Menu exposing (..)
 
 import Editor.Messages exposing (..)
-import Editor.Models as Models exposing (EditorModel, MenuStatus(..))
-import Html exposing (Html, div, i, text, textarea)
-import Html.Attributes exposing (class)
+import Editor.Models as Models exposing (Document, EditorModel, Model, MenuStatus(..))
+import Html exposing (Html, div, i, input, text, textarea)
+import Html.Attributes exposing (class, type_, value)
 import Html.Events exposing (onClick)
 
 
-html : EditorModel -> Html Message
-html model =
+html : Model -> Document -> Html Message
+html model document =
     let
-        ( open, icon ) =
-            case model.menu of
+        open =
+            case model.editor.menu of
                 Models.Open ->
-                    ( "open", "up" )
+                    "open"
 
                 Closed ->
-                    ( "closed", "down" )
+                    "closed"
     in
         div [ class ("menu" ++ " " ++ open) ]
-            [ text "Lorem Ipsum Dolor Sit Amet"
-            , div [ class "switcher", onClick (Editor (Menu Switch)) ]
-                [ i [ class ("fa fa-chevron-" ++ icon ++ " fa-fw") ] []
-                ]
+            [ input [ type_ "text", value document.meta.title ] []
+            , switcher model.editor
+            ]
+
+
+switcher : EditorModel -> Html Message
+switcher model =
+    let
+        icon =
+            case model.menu of
+                Models.Open ->
+                    "up"
+
+                Closed ->
+                    "down"
+    in
+        div [ class "switcher", onClick (Editor (Menu Switch)) ]
+            [ i [ class ("fa fa-chevron-" ++ icon ++ " fa-fw") ] []
             ]

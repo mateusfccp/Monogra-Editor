@@ -7,9 +7,14 @@
 }
 
 .editor,
-.editor textarea {
+.editor textarea,
+.editor input[type="text"] {
     color: $foreground-color;
     font-family: 'Raleway', sans-serif;
+}
+
+.editor input[type="text"] {
+    padding: .1rem .5rem;
 }
 
 .editor textarea {

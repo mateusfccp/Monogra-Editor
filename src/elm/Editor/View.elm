@@ -19,7 +19,7 @@ view model =
             loadingEditorView
 
         RemoteData.Success document ->
-            mainEditorView document model.editor
+            mainEditorView document model
 
         RemoteData.Failure error ->
             failureEditorView
@@ -42,10 +42,10 @@ loadingEditorView =
         ]
 
 
-mainEditorView : Document -> EditorModel -> Html Message
-mainEditorView document editorModel =
+mainEditorView : Document -> Model -> Html Message
+mainEditorView document model =
     div [ class "editor main" ]
-        [ Menu.html editorModel
+        [ Menu.html model document
         , Document.html document.structure
         ]
 

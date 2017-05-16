@@ -8,6 +8,7 @@
     padding: 1rem;
     margin: 0;
     transition: top 300ms ease-out;
+    border-bottom: 1px solid $background-color-darker;
     &.closed {
         top: -5em;
     }
@@ -26,8 +27,24 @@
     width: 100%;
     bottom: 0;
     left: 0;
-    transition: background-color 300ms ease-out;
+    transition: background-color 150ms ease-out;
     &:hover {
         background-color: $background-color-darker;
+    }
+}
+
+.menu input[type="text"],
+.menu textarea {
+    border: none;
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 200ms ease-out;
+    font-weight: bold;
+    &:hover {
+        background-color: $background-color-darker;
+    }
+    &:focus {
+        background-color: white;
+        font-weight: normal;
     }
 }
