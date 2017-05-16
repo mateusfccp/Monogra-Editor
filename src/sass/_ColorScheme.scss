@@ -1,3 +1,8 @@
-$color-primary: #D8BFD8;
-$color-primary-lighter: lighten($color-primary, 15);
-$color-primary-darker: darken($color-primary, 15);
+// Background Colors
+$background-color: #eee;
+$background-color-lighter: lighten($background-color, 2);
+$background-color-darker: darken($background-color, 2);
+// Foreground (Typography) Colors
+$foreground-color: #666;
+$foreground-color-lighter: lighten($foreground-color, 5);
+$foreground-color-darker: darken($foreground-color, 15)

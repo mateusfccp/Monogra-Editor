@@ -8,3 +8,14 @@ type Message
     = OnFetchDocument (WebData Document)
     | LoadDocument
     | SaveDocument
+    | Editor EditorMessage
+
+
+type EditorMessage
+    = Menu MenuMessage
+
+
+type MenuMessage
+    = Open
+    | Close
+    | Switch

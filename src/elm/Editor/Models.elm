@@ -7,14 +7,20 @@ import RemoteData exposing (WebData)
 
 
 type alias Model =
+    { document : WebData Document
+    , editor : EditorModel
+    }
+
+
+type alias EditorModel =
     { active : BlockID
-    , document : WebData Document
+    , menu : MenuStatus
     }
 
 
 initialModel : Model
 initialModel =
-    Model "" RemoteData.Loading
+    Model RemoteData.Loading { active = "", menu = Open }
 
 
 
@@ -96,3 +102,12 @@ type SectionType
 
 type alias SubsectionHeading =
     String
+
+
+
+-- Menu
+
+
+type MenuStatus
+    = Open
+    | Closed

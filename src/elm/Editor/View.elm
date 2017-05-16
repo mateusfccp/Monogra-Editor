@@ -1,8 +1,9 @@
 module Editor.View exposing (..)
 
+import Editor.Components.Menu as Menu
 import Editor.Document as Document
 import Editor.Messages exposing (Message(..))
-import Editor.Models exposing (Model)
+import Editor.Models exposing (Document, EditorModel, Model)
 import Html exposing (Html, div, hr, i, p, text)
 import Html.Attributes exposing (class)
 import RemoteData
@@ -18,12 +19,7 @@ view model =
             loadingEditorView
 
         RemoteData.Success document ->
-            div []
-                [ p [] [ text ("Editando " ++ document.meta.title) ]
-                , p [] [ text ("Autor(es): " ++ concatAuthors ", " document.meta.authors) ]
-                , hr [] []
-                , Document.html document.structure
-                ]
+            mainEditorView document model.editor
 
         RemoteData.Failure error ->
             failureEditorView
@@ -43,6 +39,14 @@ loadingEditorView =
             [ i [ class "fa fa-cog fa-spin fa-5x fa-fw" ] []
             , p [] [ text "Loading" ]
             ]
+        ]
+
+
+mainEditorView : Document -> EditorModel -> Html Message
+mainEditorView document editorModel =
+    div [ class "editor main" ]
+        [ Menu.html editorModel
+        , Document.html document.structure
         ]
 
 
