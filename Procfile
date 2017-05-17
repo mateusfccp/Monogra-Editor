@@ -1,1 +1,1 @@
-web: gulp debug-server
+web: npm run debug
