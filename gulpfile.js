@@ -82,25 +82,18 @@ gulp.task('build-css', function(callback) {
 
 gulp.task('build-js', function(callback) {
     runSequence('elm-bundle', 'js');
-})
+});
 
 gulp.task('build', ['build-js', 'build-css']);
 
 gulp.task('serve-json', function() {
     nodemon({ script: 'api.js' });
-})
+});
 
-gulp.task('debug-server', ['build', 'serve-json'], function() {
-    var elm_watcher = gulp.watch('src/elm/**/*.elm', ['elm-bundle']);
-    var css_watcher = gulp.watch('src/css/**/*.css', ['build-css']);
-    var sass_watcher = gulp.watch('src/sass/**/*.scss', ['build-css']);
-    elm_watcher.on('change', function(event) {
-        console.log('Elm Watcher: File ' + event.path + ' was ' + event.type + ', running tasks...');
-    });
-    css_watcher.on('change', function(event) {
-        console.log('CSS Watcher: File ' + event.path + ' was ' + event.type + ', running tasks...');
-    });
-    sass_watcher.on('change', function(event) {
-        console.log('Sass Watcher: File ' + event.path + ' was ' + event.type + ', running tasks...');
-    });
-})
+gulp.task('server', function() {
+
+});
+
+gulp.task('debug-server', function(callback) {
+    runSequence('build', ['serve-json', 'server']);
+});
