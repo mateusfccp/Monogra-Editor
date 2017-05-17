@@ -31,4 +31,4 @@ I made a debug server which serves a dummy document (`public/dummy.json`) and a 
 $ gulp debug-server
 ```
 
-Then, the editor will be available at `localhost:4000`, and the json server at `localhost:4000/api/db`.
+Then, the editor will be available at `localhost:3000`, and the json server at `localhost:3000/api/db`.
