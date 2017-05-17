@@ -1,7 +1,10 @@
 module Editor.Components.Menu exposing (..)
 
+import Editor.Components.Menu.Messages as Message exposing (..)
+import Editor.Components.Menu.Model as Model exposing (..)
+import Editor.Document.Model exposing (..)
+import Editor.Models exposing (..)
 import Editor.Messages exposing (..)
-import Editor.Models as Models exposing (Document, EditorModel, Model, MenuStatus(..))
 import Html exposing (Html, div, i, input, text, textarea)
 import Html.Attributes exposing (class, type_, value)
 import Html.Events exposing (onClick)
@@ -12,7 +15,7 @@ html model document =
     let
         open =
             case model.editor.menu of
-                Models.Open ->
+                Model.Open ->
                     "open"
 
                 Closed ->
@@ -29,7 +32,7 @@ switcher model =
     let
         icon =
             case model.menu of
-                Models.Open ->
+                Model.Open ->
                     "up"
 
                 Closed ->

@@ -1,4 +1,4 @@
-module Editor.Blocks.Subsection exposing (..)
+module Editor.Blocks.Subsection.View exposing (..)
 
 import Html exposing (Html, div, text)
 import Html.Attributes exposing (class)

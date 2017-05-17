@@ -1,6 +1,7 @@
 module Editor.Messages exposing (..)
 
-import Editor.Models exposing (Document)
+import Editor.Document.Model exposing (Document)
+import Editor.Components.Menu.Messages exposing (MenuMessage)
 import RemoteData exposing (WebData)
 
 
@@ -13,9 +14,3 @@ type Message
 
 type EditorMessage
     = Menu MenuMessage
-
-
-type MenuMessage
-    = Open
-    | Close
-    | Switch

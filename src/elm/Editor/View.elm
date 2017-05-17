@@ -3,7 +3,8 @@ module Editor.View exposing (..)
 import Editor.Components.Menu as Menu
 import Editor.Document as Document
 import Editor.Messages exposing (Message(..))
-import Editor.Models exposing (Document, EditorModel, Model)
+import Editor.Document.Model exposing (..)
+import Editor.Models exposing (..)
 import Html exposing (Html, div, hr, i, p, text)
 import Html.Attributes exposing (class)
 import RemoteData

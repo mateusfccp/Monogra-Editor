@@ -1,6 +1,6 @@
-module Editor.Blocks.Section exposing (..)
+module Editor.Blocks.Section.View exposing (..)
 
-import Editor.Models exposing (SectionType(..))
+import Editor.Blocks.Section.Model exposing (..)
 import Html exposing (Html, div, p, text)
 import Html.Attributes exposing (class)
 

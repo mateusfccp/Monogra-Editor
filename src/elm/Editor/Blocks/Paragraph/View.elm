@@ -1,4 +1,4 @@
-module Editor.Blocks.Paragraph exposing (..)
+module Editor.Blocks.Paragraph.View exposing (..)
 
 import Html exposing (Html, div, text, textarea)
 import Html.Attributes exposing (class)

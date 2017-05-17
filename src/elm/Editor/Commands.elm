@@ -1,6 +1,6 @@
 module Editor.Commands exposing (..)
 
-import Editor.Document as Document
+import Editor.Document.Decoder as Document
 import Editor.Messages as Messages exposing (Message)
 
 

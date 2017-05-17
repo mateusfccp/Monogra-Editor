@@ -1,6 +1,6 @@
 module BlockTree exposing (..)
 
-import Editor.Models exposing (Block, BlockTree, BlockID, BlockChildren(..))
+import Editor.Blocks.Model exposing (..)
 import List exposing (filterMap, head)
 
 

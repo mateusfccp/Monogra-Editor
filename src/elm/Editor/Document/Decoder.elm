@@ -1,17 +1,9 @@
-module Editor.Document exposing (..)
+module Editor.Document.Decoder exposing (..)
 
-import Editor.Blocks.Block as Block
-import Editor.Models exposing (BlockTree, Document, DocumentMeta)
-import Html exposing (Html, div)
-import Html.Attributes exposing (class)
+import Editor.Blocks.Decoder as Block exposing (..)
+import Editor.Document.Model exposing (..)
 import Json.Decode as Decode exposing (Decoder, list, string)
-import Json.Decode.Pipeline exposing (decode, required, optional, hardcoded)
-
-
-html : BlockTree -> Html msg
-html structure =
-    div [ class "document" ]
-        [ (Block.view structure) ]
+import Json.Decode.Pipeline exposing (decode, required)
 
 
 metaDecoder : Decoder DocumentMeta
