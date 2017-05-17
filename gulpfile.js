@@ -89,12 +89,11 @@ gulp.task('build', ['build-js', 'build-css']);
 
 // Server related
 
-gulp.task('serve-json', function() {
-    nodemon({ script: 'api.js' });
-});
+gulp.task('serve-json', function() {});
 
 gulp.task('server', function() {
-    express;
+    nodemon({ script: 'app.js' });
+    nodemon({ script: 'api.js' });
 });
 
 gulp.task('debug-server', function(callback) {
