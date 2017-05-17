@@ -1,55 +1,57 @@
 {
-    "name": "monogra-editor",
-    "version": "1.0.0",
-    "description": "Front-end Single-page-application editor used in Monogra",
-    "main": "index.js",
-    "dependencies": {
-        "basscss": "^8.0.2",
-        "clean-css": "^4.1.2",
-        "cors": "^2.8.3",
-        "elm": "^0.18.0",
-        "express": "^4.15.2",
-        "font-awesome": "^4.7.0",
-        "gulp": "^3.9.1",
-        "gulp-clean-css": "^3.2.0",
-        "gulp-concat": "^2.6.1",
-        "gulp-elm": "^0.7.1",
-        "gulp-minify": "^1.0.0",
-        "gulp-nodemon": "^2.2.1",
-        "gulp-rename": "^1.2.2",
-        "gulp-sass": "^3.1.0",
-        "json-server": "^0.10.0",
-        "run-sequence": "^1.2.2"
-    },
-    "devDependencies": {
-        "basscss": "^8.0.2",
-        "clean-css": "^4.1.2",
-        "cors": "^2.8.3",
-        "express": "^4.15.2",
-        "font-awesome": "^4.7.0",
-        "gulp": "^3.9.1",
-        "gulp-clean-css": "^3.2.0",
-        "gulp-concat": "^2.6.1",
-        "gulp-elm": "^0.7.1",
-        "gulp-minify": "^1.0.0",
-        "gulp-nodemon": "^2.2.1",
-        "gulp-rename": "^1.2.2",
-        "gulp-sass": "^3.1.0",
-        "json-server": "^0.10.0",
-        "run-sequence": "^1.2.2"
-    },
-    "scripts": {
-        "debug": "gulp debug-server",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/mateusfccp/Monogra-Editor.git"
-    },
-    "author": "Mateus Felipe C. C. Pinto <mateusfccp@gmail.com>",
-    "license": "GPL-2.0",
-    "bugs": {
-        "url": "https://github.com/mateusfccp/Monogra-Editor/issues"
-    },
-    "homepage": "https://github.com/mateusfccp/Monogra-Editor#readme"
+  "name": "monogra-editor",
+  "version": "1.0.0",
+  "description": "Front-end Single-page-application editor used in Monogra",
+  "main": "index.js",
+  "dependencies": {
+    "basscss": "^8.0.2",
+    "clean-css": "^4.1.2",
+    "compression": "^1.6.2",
+    "cors": "^2.8.3",
+    "elm": "^0.18.0",
+    "express": "^4.15.2",
+    "font-awesome": "^4.7.0",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-elm": "^0.7.1",
+    "gulp-minify": "^1.0.0",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "json-server": "^0.10.0",
+    "run-sequence": "^1.2.2"
+  },
+  "devDependencies": {
+    "basscss": "^8.0.2",
+    "clean-css": "^4.1.2",
+    "compression": "^1.6.2",
+    "cors": "^2.8.3",
+    "express": "^4.15.2",
+    "font-awesome": "^4.7.0",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-elm": "^0.7.1",
+    "gulp-minify": "^1.0.0",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "json-server": "^0.10.0",
+    "run-sequence": "^1.2.2"
+  },
+  "scripts": {
+    "debug": "gulp debug-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mateusfccp/Monogra-Editor.git"
+  },
+  "author": "Mateus Felipe C. C. Pinto <mateusfccp@gmail.com>",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/mateusfccp/Monogra-Editor/issues"
+  },
+  "homepage": "https://github.com/mateusfccp/Monogra-Editor#readme"
 }
