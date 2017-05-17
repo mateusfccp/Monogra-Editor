@@ -90,4 +90,6 @@ gulp.task('server', function() {
     nodemon({ script: 'app.js' });
 });
 
-gulp.task('debug-server', ['build', 'server']);
+gulp.task('debug-server', function(callback) {
+    runSequence('build', 'server');
+});
