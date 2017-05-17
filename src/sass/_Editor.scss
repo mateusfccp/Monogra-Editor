@@ -2,7 +2,6 @@
 @import 'Components/All';
 @import 'Document';
 .editor {
-    padding-top: 8rem;
     background-color: $background-color;
 }
 
@@ -19,6 +18,10 @@
 
 .editor textarea {
     overflow: hidden;
+}
+
+.editor.main {
+    padding-top: 8rem;
 }
 
 .editor.loading,

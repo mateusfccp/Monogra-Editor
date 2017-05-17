@@ -1,12 +1,20 @@
+var jsonServer = require('json-server');
 var express = require('express');
-var app = express();
+var cors = require('cors');
 
-app.use(express.static('public'));
+// Return a express server
+var server = express();
 
-app.get('/', function(req, res) {
+server.use('/', express.static('public'));
+
+// Set default middlewares (logger, static, cors and no-cache)
+server.use('/api', cors());
+server.use('/api', jsonServer.router('public/dummy.json'));
+
+server.get('/', function(req, res) {
     res.send('Hello World!');
 });
 
-app.listen(process.env.PORT || 3000, function() {
+server.listen(process.env.PORT || 3000, function() {
     console.log('Starting server!');
 });

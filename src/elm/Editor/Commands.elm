@@ -12,6 +12,6 @@ import RemoteData
 
 fetchDocument : Cmd Message
 fetchDocument =
-    Http.get "http://localhost:4000/api/db" Document.decoder
+    Http.get "api/db" Document.decoder
         |> RemoteData.sendRequest
         |> Cmd.map Messages.OnFetchDocument

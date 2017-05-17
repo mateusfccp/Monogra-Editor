@@ -3,7 +3,6 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var cleanCSS = require('gulp-clean-css');
 var elm = require('gulp-elm');
-var express = require('./app.js');
 var minify = require('gulp-minify');
 var nodemon = require('gulp-nodemon');
 var rename = require('gulp-rename');
@@ -87,15 +86,8 @@ gulp.task('build-js', function(callback) {
 
 gulp.task('build', ['build-js', 'build-css']);
 
-// Server related
-
-gulp.task('serve-json', function() {});
-
 gulp.task('server', function() {
     nodemon({ script: 'app.js' });
-    nodemon({ script: 'api.js' });
 });
 
-gulp.task('debug-server', function(callback) {
-    runSequence('build', ['serve-json', 'server']);
-});
+gulp.task('debug-server', ['build', 'server']);
