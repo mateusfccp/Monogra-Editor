@@ -7,7 +7,12 @@ var jsonServer = require('json-server');
 var server = express();
 
 server.use(compression());
-server.use('/', express.static('public'));
+server.use('/', express.static('public', {
+    maxAge: '7d',
+    setHeaders: function(res, path) {
+        res.setHeader('Cache-Control', 'public, max-age=0');
+    }
+}));
 
 // Set default middlewares (logger, static, cors and no-cache)
 server.use('/api', cors());
