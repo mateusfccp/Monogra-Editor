@@ -42,6 +42,10 @@ gulp.task('js', function() {
         .pipe(gulp.dest('public/dist/'));
 });
 
+gulp.task('build-js', function(callback) {
+    runSequence('elm-bundle', 'js');
+});
+
 // CSS related
 
 gulp.task('sass', function() {
@@ -80,14 +84,16 @@ gulp.task('build-css', function(callback) {
     runSequence('sass', 'css');
 });
 
-gulp.task('build-js', function(callback) {
-    runSequence('elm-bundle', 'js');
-});
+// Other
 
 gulp.task('build', ['build-js', 'build-css']);
+
+// Server related
 
 gulp.task('server', function() {
     nodemon({ script: 'app.js' });
 });
 
-gulp.task('debug-server', ['build', 'server']);
+gulp.task('debug-server', function() {
+    runSequence('build', 'server');
+});
