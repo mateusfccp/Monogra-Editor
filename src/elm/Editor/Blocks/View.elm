@@ -8,31 +8,31 @@ import Editor.Blocks.Section.View as Section
 import Editor.Blocks.Subsection.View as Subsection
 
 
-view : BlockNode -> Html msg
-view block =
+view : BlockNode -> BlockID -> Html msg
+view block active =
     let
-        inner =
+        html =
             case block.value of
                 Paragraph paragraphType content ->
-                    Paragraph.html content
+                    Paragraph.html content (block.id == active)
 
                 Root ->
-                    div [] (parseChildren block.children)
+                    div [ class "document" ] (parseChildren block.children active)
 
                 Section sectionType ->
-                    Section.html sectionType (parseChildren block.children)
+                    Section.html sectionType (parseChildren block.children active)
 
-                Subsection heading ->
-                    Subsection.html heading (parseChildren block.children)
+                Subsection header ->
+                    Subsection.html header (parseChildren block.children active)
     in
-        div [ class "block" ] [ inner ]
+        html
 
 
-parseChildren : BlockChildren -> List (Html msg)
-parseChildren children =
+parseChildren : BlockChildren -> BlockID -> List (Html msg)
+parseChildren children active =
     case children of
         Some children ->
-            List.map view children
+            List.map (view children active)
 
         None ->
             []

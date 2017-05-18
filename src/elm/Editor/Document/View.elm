@@ -7,7 +7,6 @@ import Html exposing (Html, div)
 import Html.Attributes exposing (class)
 
 
-html : BlockTree -> Html msg
-html structure =
-    div [ class "document" ]
-        [ (Block.view structure) ]
+html : Document -> BlockID -> Html msg
+html document =
+    Block.view document.structure active

@@ -1,19 +1,37 @@
+@import '../ColorScheme';
+$block-color: white;
+$block-color-darker: darken($block-color, 15);
 .block {
     border: 0;
     border-radius: 0;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: $block-color;
+    box-shadow: 2px 2px 4px $block-color-darker;
+    position: relative;
     padding: 0;
+    padding-top: .8rem;
     margin: 0;
     width: 100%;
-    .header {
-        width: 100%;
-        font-size: 1rem;
-        font-weight: bold;
-        text-transform: upper;
-        padding-left: 1rem;
-        background-color: #efefef;
-    }
     & & {
         box-shadow: none;
+    }
+}
+
+.block .header {
+    position: absolute;
+    top: .1rem;
+    left: .25rem;
+    font-size: .6rem;
+    font-weight: bold;
+    font-variant: small-caps;
+}
+
+.block .close-button {
+    position: absolute;
+    top: .1rem;
+    right: .25rem;
+    font-size: .6rem;
+    transition: color 150ms ease-out;
+    &:hover {
+        color: $foreground-color-darker;
     }
 }

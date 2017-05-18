@@ -7,7 +7,7 @@ import RemoteData exposing (WebData)
 
 
 type alias Model =
-    { document : WebData Document
+    { document : WebDocument
     , editor : EditorModel
     }
 

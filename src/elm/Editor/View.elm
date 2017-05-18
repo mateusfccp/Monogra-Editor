@@ -47,7 +47,7 @@ mainEditorView : Document -> Model -> Html Message
 mainEditorView document model =
     div [ class "editor main" ]
         [ Menu.html model document
-        , Document.html document.structure
+        , Document.html document model.editor.active
         ]
 
 

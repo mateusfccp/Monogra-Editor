@@ -3,9 +3,6 @@ module Editor.Commands exposing (..)
 import Editor.Document.Decoder as Document
 import Editor.Messages as Messages exposing (Message)
 
-
--- import Editor.Models exposing (Document)
-
 import Http
 import RemoteData
 
