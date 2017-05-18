@@ -3,11 +3,11 @@ var cors = require('cors');
 var express = require('express');
 var jsonServer = require('json-server');
 
-// Port
-server.set('port', (process.env.PORT || 5000));
-
 // Return a express server
 var server = express();
+
+// Port
+server.set('port', (process.env.PORT || 5000));
 
 server.use(compression());
 server.use('/', express.static('public', {
