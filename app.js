@@ -3,6 +3,9 @@ var cors = require('cors');
 var express = require('express');
 var jsonServer = require('json-server');
 
+// Port
+server.set('port', (process.env.PORT || 5000));
+
 // Return a express server
 var server = express();
 
@@ -22,6 +25,6 @@ server.get('/', function(req, res) {
     res.send('Hello World!');
 });
 
-server.listen(process.env.PORT || 3000, function() {
-    console.log('Starting server!');
+server.listen(server.get('port'), function() {
+  console.log('Node app is running on port ', server.get('port'));
 });
