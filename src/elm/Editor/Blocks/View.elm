@@ -2,13 +2,14 @@ module Editor.Blocks.Block exposing (..)
 
 import Html exposing (Html, div)
 import Html.Attributes exposing (class)
+import Editor.Messages exposing (..)
 import Editor.Blocks.Model exposing (..)
 import Editor.Blocks.Paragraph.View as Paragraph
 import Editor.Blocks.Section.View as Section
 import Editor.Blocks.Subsection.View as Subsection
 
 
-view : BlockNode -> BlockID -> Html msg
+view : BlockNode -> BlockID -> Html Message
 view block active =
     let
         html =
@@ -28,11 +29,15 @@ view block active =
         html
 
 
-parseChildren : BlockChildren -> BlockID -> List (Html msg)
+parseChildren : BlockChildren -> BlockID -> List (Html Message)
 parseChildren children active =
-    case children of
-        Some children ->
-            List.map (view children active)
+    let
+        view_ =
+            (\child -> view child active)
+    in
+        case children of
+            Some children ->
+                List.map view_ children
 
-        None ->
-            []
+            None ->
+                []

@@ -2,6 +2,7 @@ module Editor.Document.Messages exposing (..)
 
 import Editor.Models exposing (..)
 import Editor.Blocks.Model exposing (BlockID, BlockNode)
+import Editor.BlockTree exposing (..)
 import Editor.Document.Model as Document exposing (..)
 import RemoteData exposing (WebData)
 
@@ -78,9 +79,21 @@ updateMetaSet msg model =
 
 updateStructure : StructureMessage -> Model -> ( Model, Cmd msg )
 updateStructure msg model =
-    case msg of
-        DeleteBlock id ->
-            model ! []
+    let
+        document =
+            case model.document of
+                RemoteData.Success document ->
+                    document
 
-        SetBlock id value ->
-            model ! []
+                _ ->
+                    Document.empty
+
+        structure =
+            document.structure
+    in
+        case msg of
+            DeleteBlock id ->
+                ( { model | document = RemoteData.Success ({ document | structure = structure |> removeChild id }) }, Cmd.none )
+
+            SetBlock id value ->
+                model ! []
