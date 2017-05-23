@@ -1,32 +1,36 @@
-module Editor.Blocks.Block exposing (..)
+module Editor.Blocks.View exposing (..)
 
-import Html exposing (Html, div)
-import Html.Attributes exposing (class)
+import Html exposing (Html, div, i, p, text)
+import Html.Attributes exposing (attribute, class, classList)
+import Html.Events as Events
 import Editor.Messages exposing (..)
+import Editor.Document.Messages exposing (..)
 import Editor.Blocks.Model exposing (..)
 import Editor.Blocks.Paragraph.View as Paragraph
 import Editor.Blocks.Section.View as Section
 import Editor.Blocks.Subsection.View as Subsection
+import Json.Decode as Json
 
 
 view : BlockNode -> BlockID -> Html Message
 view block active =
     let
-        html =
-            case block.value of
-                Paragraph paragraphType content ->
-                    Paragraph.html content (block.id == active)
-
-                Root ->
-                    div [ class "document" ] (parseChildren block.children active)
-
-                Section sectionType ->
-                    Section.html sectionType (parseChildren block.children active)
-
-                Subsection header ->
-                    Subsection.html header (parseChildren block.children active)
+        classList_ =
+            classList
+                [ ( "block", True )
+                , ( "active", (block.id == active) )
+                ]
     in
-        html
+        div [ attribute "data-id" block.id, classList_ ]
+            [ div [ class "header" ]
+                [ p [] [ text "Bibliografia" ]
+                , div
+                    [ class "close-button"
+                    , onClickID deleteBlock
+                    ]
+                    [ i [ class "fa fa-times fa-fw" ] [] ]
+                ]
+            ]
 
 
 parseChildren : BlockChildren -> BlockID -> List (Html Message)
@@ -41,3 +45,18 @@ parseChildren children active =
 
             None ->
                 []
+
+
+deleteBlock : BlockID -> Message
+deleteBlock id =
+    (Document (Structure (DeleteBlock id)))
+
+
+onClickID : (BlockID -> msg) -> Html.Attribute msg
+onClickID message =
+    Events.on "click" (Json.map message targetID)
+
+
+targetID : Json.Decoder String
+targetID =
+    Json.at [ "target", "data-id" ] Json.string

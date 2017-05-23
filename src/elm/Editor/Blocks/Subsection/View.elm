@@ -1,13 +1,26 @@
 module Editor.Blocks.Subsection.View exposing (..)
 
-import Html exposing (Html, div, i, text)
-import Html.Attributes exposing (class)
+import Editor.Messages exposing (..)
+import Html exposing (Html)
 
 
-html : String -> List (Html msg) -> Html msg
-html header children =
-    div [ class "block subsection" ]
-        [ div [ class "header" ] [ text ("Seção: " ++ header) ]
-        , div [ class "close-button" ] [ i [ class "fa fa-times fa-fw" ] [] ]
-        , div [] children
-        ]
+class : Bool -> List ( String, Bool )
+class active =
+    [ ( "subsection", True )
+    , ( "active", active )
+    ]
+
+
+events : List (Html.Attribute Message)
+events =
+    []
+
+
+headerText : String
+headerText =
+    "Section"
+
+
+html : List (Html msg) -> List (Html msg)
+html children =
+    children

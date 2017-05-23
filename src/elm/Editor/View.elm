@@ -1,7 +1,7 @@
 module Editor.View exposing (..)
 
 import Editor.Components.Menu as Menu
-import Editor.Document as Document
+import Editor.Document.View as Document
 import Editor.Messages exposing (Message(..))
 import Editor.Document.Model exposing (..)
 import Editor.Models exposing (..)

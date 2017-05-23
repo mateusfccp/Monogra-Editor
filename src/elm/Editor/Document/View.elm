@@ -1,7 +1,7 @@
-module Editor.Document exposing (..)
+module Editor.Document.View exposing (..)
 
 import Editor.Messages exposing (..)
-import Editor.Blocks.Block as Block
+import Editor.Blocks.View as Block
 import Editor.Blocks.Model exposing (..)
 import Editor.Document.Model exposing (..)
 import Html exposing (Html, div)
