@@ -54,7 +54,7 @@ gulp.task('sass', function() {
         .pipe(gulp.dest('src/css'));
 });
 
-gulp.task('css', ['sass'], function() {
+gulp.task('css', function() {
     return gulp.src(['src/css/**/reboot.css', 'src/css/**/basscss.css', 'src/css/**/font-awesome.css', 'src/css/**/*.css'])
         .pipe(concat('style.css'))
         .pipe(cleanCSS({
@@ -87,6 +87,30 @@ gulp.task('build-css', function(callback) {
 // Other
 
 gulp.task('build', ['build-js', 'build-css']);
+
+gulp.task('listen', function() {
+    console.log('Starting to listen to file changes...');
+
+    var scss = gulp.watch('src/sass/**/*.scss', ['build-css']);
+    scss.on('change', function(event) {
+        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    });
+
+    var css = gulp.watch('src/css/**/*.css', ['css']);
+    css.on('change', function(event) {
+        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    });
+
+    var elm = gulp.watch('src/elm/**/*.elm', ['build-js']);
+    elm.on('change', function(event) {
+        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    });
+
+    var js = gulp.watch('src/js/**/*.js', ['js']);
+    js.on('change', function(event) {
+        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    });
+});
 
 // Server related
 
