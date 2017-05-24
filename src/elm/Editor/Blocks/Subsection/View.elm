@@ -1,24 +1,22 @@
 module Editor.Blocks.Subsection.View exposing (..)
 
-import Editor.Messages exposing (..)
 import Html exposing (Html)
 
 
-class : Bool -> List ( String, Bool )
-class active =
+class : List ( String, Bool )
+class =
     [ ( "subsection", True )
-    , ( "active", active )
     ]
 
 
-events : List (Html.Attribute Message)
+events : List (Html.Attribute msg)
 events =
     []
 
 
-headerText : String
-headerText =
-    "Section"
+header : String -> String
+header title =
+    title
 
 
 html : List (Html msg) -> List (Html msg)

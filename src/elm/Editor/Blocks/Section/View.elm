@@ -2,37 +2,65 @@ module Editor.Blocks.Section.View exposing (..)
 
 import Editor.Blocks.Section.Model exposing (..)
 import Html exposing (Html, div, i, p, text)
-import Html.Attributes exposing (class)
 
 
-html : SectionType -> List (Html msg) -> Html msg
-html sectiontype children =
-    case sectiontype of
+class : SectionType -> List ( String, Bool )
+class sectionType =
+    let
+        ( cover, index, body, bibliography ) =
+            case sectionType of
+                Cover ->
+                    ( True, False, False, False )
+
+                Index ->
+                    ( False, True, False, False )
+
+                Body ->
+                    ( False, False, True, False )
+
+                Bibliography ->
+                    ( False, False, False, True )
+    in
+        [ ( "section", True )
+        , ( "cover", cover )
+        , ( "index", index )
+        , ( "body", body )
+        , ( "bibliography", bibliography )
+        ]
+
+
+events : List (Html.Attribute msg)
+events =
+    []
+
+
+header : SectionType -> String
+header sectionType =
+    case sectionType of
         Cover ->
-            div [ class "block section cover" ]
-                [ div [ class "header" ] [ text "Capa" ]
-                , div [ class "close-button" ] [ i [ class "fa fa-times fa-fw" ] [] ]
-                , p [] [ text "Este bloco representa a capa." ]
-                ]
+            "Capa"
 
         Index ->
-            div [ class "block section index" ]
-                [ div [ class "header" ] [ text "Índice" ]
-                , div [ class "close-button" ] [ i [ class "fa fa-times fa-fw" ] [] ]
-                , p [] [ text "Aqui será renderizada uma representação do índice." ]
-                ]
+            "Índice"
 
         Body ->
-            div [ class "block section body" ]
-                ([ div [ class "header" ] [ text "Corpo" ]
-                 , div [ class "close-button" ] [ i [ class "fa fa-times fa-fw" ] [] ]
-                 ]
-                    ++ children
-                )
+            "Corpo"
 
         Bibliography ->
-            div [ class "block section bibliography" ]
-                [ div [ class "header" ] [ text "Bibliografia" ]
-                , div [ class "close-button" ] [ i [ class "fa fa-times fa-fw" ] [] ]
-                , p [] [ text "Aqui será renderizada uma representação da bibliografia." ]
-                ]
+            "Bibliografia"
+
+
+html : SectionType -> List (Html msg) -> List (Html msg)
+html sectionType children =
+    case sectionType of
+        Cover ->
+            [ p [] [ text "Este bloco representa a capa." ] ]
+
+        Index ->
+            [ p [] [ text "Aqui será renderizada uma representação do índice." ] ]
+
+        Body ->
+            children
+
+        Bibliography ->
+            [ p [] [ text "Aqui será renderizada uma representação da bibliografia." ] ]

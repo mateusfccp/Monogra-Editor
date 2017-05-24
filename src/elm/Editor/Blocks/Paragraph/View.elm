@@ -1,26 +1,24 @@
 module Editor.Blocks.Paragraph.View exposing (..)
 
-import Editor.Messages exposing (..)
 import Html exposing (Html, div, text, textarea)
 
 
-class : Bool -> List ( String, Bool )
-class active =
+class : List ( String, Bool )
+class =
     [ ( "paragraph", True )
-    , ( "active", active )
     ]
 
 
-events : List (Html.Attribute Message)
+events : List (Html.Attribute msg)
 events =
     []
 
 
-headerText : String
-headerText =
-    "Paragraph"
+header : String
+header =
+    "Parágrafo"
 
 
-html : String -> List (Html Message)
+html : String -> List (Html msg)
 html content =
     [ textarea [] [ text content ] ]
