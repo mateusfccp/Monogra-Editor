@@ -3,7 +3,7 @@ module Editor.Blocks.Paragraph.Model exposing (..)
 
 type ParagraphType
     = DefaultParagraph
-    | Quote
+    | QuoteParagraph
 
 
 type alias ParagraphContent =

@@ -24,7 +24,8 @@ type MetaSetMessage
 
 
 type StructureMessage
-    = DeleteBlock BlockID
+    = AddBlock BlockID BlockNode
+    | DeleteBlock BlockID
     | SetBlock BlockID BlockNode
 
 
@@ -95,5 +96,8 @@ updateStructure msg model =
             DeleteBlock id ->
                 ( { model | document = RemoteData.Success ({ document | structure = structure |> removeChild id }) }, Cmd.none )
 
-            SetBlock id value ->
+            AddBlock id node ->
+                ( { model | document = RemoteData.Success ({ document | structure = structure |> addAfter id node }) }, Cmd.none )
+
+            _ ->
                 model ! []

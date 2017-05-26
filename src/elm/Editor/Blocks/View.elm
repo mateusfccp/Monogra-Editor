@@ -6,7 +6,8 @@ import Editor.Blocks.Model exposing (..)
 import Editor.Blocks.Paragraph.View as Paragraph
 import Editor.Blocks.Section.View as Section
 import Editor.Blocks.Subsection.View as Subsection
-import List exposing (map)
+import Editor.Components.AddBlock.View as AddBlock
+import List exposing (intersperse, map)
 import Html exposing (Html, div, i, p, text)
 import Html.Attributes exposing (attribute, class, classList)
 import Html.Events exposing (onClick)
@@ -68,6 +69,7 @@ parseBlock block active =
                 ]
              ]
                 ++ blockData.html
+                ++ [ (AddBlock.html block.id) ]
             )
 
 

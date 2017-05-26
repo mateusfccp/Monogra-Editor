@@ -20,7 +20,7 @@ paragraphTypeDecoder paragraphType =
             decode DefaultParagraph
 
         "Quote" ->
-            decode Quote
+            decode QuoteParagraph
 
         _ ->
             fail (paragraphType ++ " is not a recognized ParagraphType")
